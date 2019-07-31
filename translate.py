@@ -1,13 +1,15 @@
 ''' Translate input text with trained model. '''
 
+import argparse
+
 import torch
 import torch.utils.data
-import argparse
 from tqdm import tqdm
 
 from dataset import collate_fn, TranslationDataset
-from transformer.Translator import Translator
 from preprocess import read_instances_from_file, convert_instance_to_idx_seq
+from transformer.Translator import Translator
+
 
 def main():
     '''Main Function'''
@@ -64,6 +66,7 @@ def main():
                     pred_line = ' '.join([test_loader.dataset.tgt_idx2word[idx] for idx in idx_seq])
                     f.write(pred_line + '\n')
     print('[Info] Finished.')
+
 
 if __name__ == "__main__":
     main()
